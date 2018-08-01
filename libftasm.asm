@@ -229,14 +229,14 @@ ft_puts:
 ;--------------------------------------------------------------
 
 ft_isspace:
-	mov	rax, 1
-	cmp	rdi, 0x20
-	je	ft_isspace_return
 	xor	rax, rax
+	cmp	rdi, 0x20
+	je	ft_isspace_positive
 	cmp	rdi, 9
 	jb	ft_isspace_return
 	cmp	rdi, 13
 	ja	ft_isspace_return
+ft_isspace_positive:
 	inc	rax
 ft_isspace_return:
 	ret
