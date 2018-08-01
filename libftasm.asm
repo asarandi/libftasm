@@ -25,6 +25,8 @@ section	.text
 	global	ft_strlen:function
 	global	ft_tolower:function
 	global	ft_toupper:function
+	global	ft_isspace:function
+	global	ft_atoi:function
 
 ;--------------------------------------------------------------
 
@@ -223,7 +225,87 @@ ft_puts:
 	pop	rsi
 	pop	rdi
 	ret
-	
+
+;--------------------------------------------------------------
+
+ft_isspace:
+	mov	rax, 1
+	cmp	rdi, 0x20
+	je	ft_isspace_return
+	xor	rax, rax
+	cmp	rdi, 9
+	jb	ft_isspace_return
+	cmp	rdi, 13
+	ja	ft_isspace_return
+	inc	rax
+ft_isspace_return:
+	ret
+
+;--------------------------------------------------------------
+
+ft_atoi:
+	push	rdi
+	push	rsi
+	push	rbx
+	push	rdx
+
+	mov	rsi, rdi
+	xor	rbx, rbx
+
+ft_atoi_skip_spaces:
+	lodsb
+	cmp	al, 0
+	jz	ft_atoi_done
+	and	rax, 0xff
+	mov	rdi, rax
+	call ft_isspace
+	cmp	rax, 1
+	je	ft_atoi_skip_spaces
+
+	xor	rdx, rdx	; will use rdx as a flag, clear for now
+	dec	rsi
+	cmp	byte [rsi], '-'
+	jne	ft_atoi_no_minus_sign
+	inc	rdx			; set negative flag
+	inc	rsi
+	jmp	ft_atoi_process_digits
+
+ft_atoi_no_minus_sign:
+	cmp	byte [rsi], '+'
+	jne	ft_atoi_process_digits
+	inc	rsi
+
+ft_atoi_process_digits:
+	lodsb
+	cmp	al, 0
+	jz	ft_atoi_no_more_digits
+	and	rax, 0xff
+	mov	rdi, rax
+	call ft_isdigit
+	cmp	rax, 1
+	jne	ft_atoi_no_more_digits
+	imul	rbx, rbx, 10
+	sub	rdi, '0'
+	add	rbx, rdi
+	jmp	ft_atoi_process_digits
+
+ft_atoi_no_more_digits:
+	cmp	rdx, 0
+	jz	ft_atoi_done
+	xor	rdx, rdx
+	sub	rdx, rbx
+	mov	rbx, rdx
+
+ft_atoi_done:
+	pop	rdx
+	mov	rax, rbx
+	pop	rbx
+	pop	rsi
+	pop	rdi
+	ret
+
+
+
 ;
 ;
 ;

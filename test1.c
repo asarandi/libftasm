@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "libftasm.h"
 
@@ -41,6 +42,75 @@ ft_puts
 	printf("ft_strlen(s1) = %ld, strlen(s1) = %ld, s1 = [%s]\n", ft_strlen(s1), strlen(s1), s1);
 	printf("ft_strlen(s2) = %ld, strlen(s2) = %ld, s2 = [%s]\n", ft_strlen(s2), strlen(s2), s2);
 	printf("ft_strlen(s3) = %ld, strlen(s3) = %ld, s3 = [%s]\n", ft_strlen(s3), strlen(s3), s3);
+
+	printf("\n\n");
+
+
+
+	char	*n1;
+
+	n1 = "123"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "-123"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "0"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "-0"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "+0"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "  	+7642"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "	+ 1942"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "  -1042"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "  - 1242"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "1142--"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+
+
+	n1 = "++42"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "--42"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "-+42"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "+-42"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "123456789"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "-123456789"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "999999999999999"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+
+	n1 = "–2147483648"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "–2147483649"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+
+
+	n1 = "2147483647"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "2147483649"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+
+
+	n1 = "4294967294"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "4294967295"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "4294967296"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+	n1 = "4294967297"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
