@@ -110,35 +110,10 @@ ft_puts
 //	ft_puts(0);	/* crash */
 	ft_puts("hel\tlo\t\t\twor\tld!!=)");
 
+	char	*buf1;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	buf1 = ft_itoa(0x7fffffff + 2);
+	ft_puts(buf1);
 
 
 

@@ -1,5 +1,11 @@
+bits 64
+default rel
+extern	malloc
+
+
 %include "unistd_64.h.asm"
 %include "my_const.asm"
+
 
 ;
 ;       arch/ABI      arg1  arg2  arg3  arg4  arg5  arg6  arg7  Notes
@@ -22,6 +28,8 @@ section	.data
 
 
 section	.text
+
+	global	ft_itoa:function
 	global	ft_bzero:function
 	global	ft_memset:function
 	global	ft_memcpy:function
@@ -41,6 +49,101 @@ section	.text
 	global	ft_isspace:function
 	global	ft_atoi:function
 	global	ft_mytest:function
+
+
+
+ft_itoa_count_digits:
+	; <<--- rdi = int
+	; rax will return number of digits, if rdi=0, rax returns 1
+	push	rcx
+	push	rbx
+	push	rdx
+	
+	mov		rbx, 1
+	cmp		rdi, 0
+	jz		ft_itoa_count_digits_return
+	xor		rbx, rbx
+
+	mov		rax, rdi
+	mov		rcx, 10
+
+ft_itoa_count_digits_loop:
+	xor		rdx, rdx
+	div		rcx
+	inc		rbx
+	cmp		rax, 0
+	jnz		ft_itoa_count_digits_loop
+
+
+ft_itoa_count_digits_return:
+	mov		rax, rbx
+	pop		rdx
+	pop		rbx
+	pop		rcx
+	ret
+
+
+
+ft_itoa:
+	; rdi <<-- int
+	; rax should return char *, buffer to be allocated via malloc
+
+	push	rdi
+	push	rdx
+	push	rbx
+	push	r13
+	push	r12
+	push	r11
+	xor	r11, r11
+
+	and	rdi, 0xffffffff
+	cmp	rdi, 0x80000000
+	jb	ft_itoa_int_not_negative
+	inc	r11 ;<<-- set negative flag
+	mov	rax, rdi
+	add	rax, 0xffffffff00000000
+	xor	rdi, rdi
+	sub	rdi, rax
+	and	rdi, 0xffffffff
+ft_itoa_int_not_negative:
+	call ft_itoa_count_digits
+	add	rax, r11	;number of digits + negative sign (if set)
+	inc	rax			; extra byte for null terminator
+
+	mov	r12, rdi	; N
+	mov	rdi, rax
+	mov	r13, rax
+	call malloc WRT ..plt
+	cmp	rax, 0
+	jz	ft_itoa_return
+
+	mov	rbx, rax
+	mov rax, r12
+	mov	rcx, 10
+
+ft_itoa_loop:
+	xor	rdx, rdx
+	div	rcx
+	add	dl, '0'
+	dec	r13
+	mov	byte [rbx + r13 - 1], dl
+	cmp	rax, 0
+	jnz	ft_itoa_loop
+	cmp	r11, 1
+	jne	ft_itoa_skip_minus_sign
+	mov	byte [rbx], '-'
+
+ft_itoa_skip_minus_sign:
+	mov	rax, rbx
+ft_itoa_return:
+	pop	r11
+	pop	r12
+	pop	r13
+	pop	rbx
+	pop	rdx
+	pop	rdi
+
+	ret
 
 ft_mytest:
 	inc	rax
