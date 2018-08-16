@@ -88,9 +88,17 @@ ft_puts
 
 	char s4[] = "apple banana orange";
 	ft_puts(s4);
-	ft_memset(s4, 'z', 9); 	ft_puts(s4);
-	ft_memset(s4, 'a', 5);	ft_puts(s4);
-	ft_memset(s4, 'Q', 1); ft_puts(s4);
+
+	ft_puts(ft_memset(s4, 'z', 9));
+	ft_puts(ft_memset(s4, 'a', 5));
+	ft_puts(ft_memset(s4, 'Q', 1));
+	ft_puts(ft_memcpy(s4, "HaHeHoHu", 8));
+	ft_puts(ft_memcpy(s4, s2, ft_strlen(s2)));
+	ft_puts(ft_memcpy(s4, s2, 0));
+
+
+
+
 //	ft_memset(s4, 0, 12); ft_puts(s4);
 	ft_bzero(s4, ft_strlen(s4)); ft_puts(s4);
 	ft_puts("finito");

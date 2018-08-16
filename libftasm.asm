@@ -15,6 +15,7 @@ section	.data
 section	.text
 	global	ft_bzero:function
 	global	ft_memset:function
+	global	ft_memcpy:function
 	global	ft_isalnum:function
 	global	ft_isalpha:function
 	global	ft_isascii:function
@@ -89,9 +90,29 @@ ft_memset:
 	mov	rax, rdi	;return pointer to memory area s (rdi)
 	ret
 
+
 ;--------------------------------------------------------------
+; rdi, rsi, rdx
+; rdi = void *dest, rsi = const void *src, rdx = size_t n
 
+ft_memcpy:
+	push	rdi
+	push	rsi
+	push	rcx
 
+	mov	rcx, rdx	;size_t n
+
+	rep	movsb		;while (rcx)
+					;move one byte from rsi to rdi,
+					;increment rsi rdi, decrement rcx
+
+	pop	rcx
+	pop	rsi
+	pop	rdi
+	mov	rax, rdi	;return *dest
+	ret
+
+;--------------------------------------------------------------
 
 
 
