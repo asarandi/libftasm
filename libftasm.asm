@@ -9,10 +9,12 @@
 ;
 
 section	.data
-	newLine		db	lf, 0
+	myBuffer	db	0, 0, 0, 0, 0, 0, 0, 0
+
 
 section	.text
 	global	ft_bzero:function
+	global	ft_memset:function
 	global	ft_isalnum:function
 	global	ft_isalpha:function
 	global	ft_isascii:function
@@ -20,6 +22,7 @@ section	.text
 	global	ft_islower:function
 	global	ft_isprint:function
 	global	ft_isupper:function
+	global	ft_putchar:function
 	global	ft_puts:function
 	global	ft_strcat:function
 	global	ft_strlen:function
@@ -70,6 +73,27 @@ ft_bzero:
 	ret
 
 ;--------------------------------------------------------------
+; rdi, rsi, rdx
+; rdi = void *s, rsi = int c, rdx = size_t n
+
+ft_memset:
+	push	rdi
+	push	rcx
+
+	mov	rcx, rdx	;size_t n
+	mov	rax, rsi	;int c
+	rep	stosb		;put al in [rdi], decrement rcx, repeat while rcx > 0
+
+	pop	rcx
+	pop	rdi
+	mov	rax, rdi	;return pointer to memory area s (rdi)
+	ret
+
+;--------------------------------------------------------------
+
+
+
+
 
 ft_strcat:
 	push	rdi
@@ -203,24 +227,70 @@ ft_tolower_return:
 
 ;--------------------------------------------------------------
 
+ft_putchar:
+	push	rdi	; <<-- byte to be written to stdout
+	push	rsi
+	push	rdx
+
+	mov		rax, rdi
+;	and		rax, 0xff
+	mov		rsi, myBuffer
+	mov		[rsi], al	; <<-- put one byte at beginning of buffer
+	mov		rdx, 1		; <<-- how many bytes to write
+	mov		rdi, STDOUT	; <<-- where to write
+	mov		rax, sys_write
+	syscall
+	cmp		rax, 1
+	je		ft_putchar_success
+	mov		rax, EOF	; <<-- putchar returns EOF on error
+	jmp		ft_putchar_return
+ft_putchar_success:
+	mov		al, byte [rsi]
+	and		rax, 0xff
+
+ft_putchar_return:
+	pop	rdx
+	pop	rsi
+	pop	rdi
+	ret
+
+
+
+;
+; per debian manpage for puts, it must return a non-negative int or EOF on error
+; here we'll use r12 as a counter and return number of bytes written, why not?
+; it should always be at least 1 (lf)
+;
+
 ft_puts:
 	push	rdi
 	push	rsi
 	push	rdx
+	push	r12
 
-	call ft_strlen
-	mov	rdx, rax
-	mov	rsi, rdi
-	mov	rdi, STDOUT
-	mov	rax, sys_write
-	syscall
-
-	mov	rdx, 1
-	mov	rsi, newLine
-	mov	rdi, STDOUT
-	mov	rax, sys_write
-	syscall
-
+	mov		rsi, rdi
+	xor		r12, r12
+ft_puts_loop:
+	lodsb
+	cmp	al, 0
+	jz	ft_puts_no_more_bytes
+	and	rax, 0xff
+	mov	rdi, rax
+	call ft_putchar
+	cmp	rax, EOF		; return EOF on fail
+	je	ft_puts_return
+	inc	r12				; increment counter
+	jmp	ft_puts_loop
+ft_puts_no_more_bytes:
+	mov	rdi, LF
+	call ft_putchar
+	cmp	rax, EOF
+	je	ft_puts_return	; eof on fail
+	inc	r12
+	mov	rax, r12		; return number of bytes written
+						; note: some puts implementations return 1 or true ..
+ft_puts_return:
+	pop	r12
 	pop	rdx
 	pop	rsi
 	pop	rdi

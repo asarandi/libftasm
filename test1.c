@@ -83,6 +83,24 @@ ft_puts
 	n1 = "4294967297"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
 
 
+	int poots = ft_puts("hello world");
+	printf(" ^^ previous string via ft_puts, returned = %d\n", poots);
+
+	char s4[] = "apple banana orange";
+	ft_puts(s4);
+	ft_memset(s4, 'z', 9); 	ft_puts(s4);
+	ft_memset(s4, 'a', 5);	ft_puts(s4);
+	ft_memset(s4, 'Q', 1); ft_puts(s4);
+//	ft_memset(s4, 0, 12); ft_puts(s4);
+	ft_bzero(s4, ft_strlen(s4)); ft_puts(s4);
+	ft_puts("finito");
+
+
+	ft_puts("");
+//	ft_puts(0);	/* crash */
+	ft_puts("hel\tlo\t\t\twor\tld!!=)");
+
+
 
 
 
