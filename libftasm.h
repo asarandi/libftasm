@@ -19,5 +19,6 @@ int		ft_putchar(int c);
 int		ft_puts(const char *s);
 int		ft_isspace(int c);
 int		ft_atoi(const char *nptr);
+int		ft_mytest(int a, int b, int c, int d, int e, int f, int g, int h);
 
 #endif

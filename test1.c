@@ -103,6 +103,8 @@ ft_puts
 	ft_bzero(s4, ft_strlen(s4)); ft_puts(s4);
 	ft_puts("finito");
 
+	printf("ft_mytest: %x\n", ft_mytest(0x100001, 0x100002, 0x100003, 0x100004, 0x100005, 0x100006, 0x100007, 0x100008));
+
 
 	ft_puts("");
 //	ft_puts(0);	/* crash */

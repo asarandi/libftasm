@@ -7,6 +7,15 @@
 ;       i386          ebx   ecx   edx   esi   edi   ebp   -
 ;       x86-64        rdi   rsi   rdx   r10   r8    r9    -
 ;
+;
+;###################################################
+;
+; as per ft_mytest
+;
+;	arg1	arg2	arg3	arg4	arg5	arg6
+;	rdi,	rsi,	rdx,	rcx,	 r8,	r9
+;
+;
 
 section	.data
 	myBuffer	db	0, 0, 0, 0, 0, 0, 0, 0
@@ -31,6 +40,12 @@ section	.text
 	global	ft_toupper:function
 	global	ft_isspace:function
 	global	ft_atoi:function
+	global	ft_mytest:function
+
+ft_mytest:
+	inc	rax
+	dec	rax
+	ret
 
 ;--------------------------------------------------------------
 
