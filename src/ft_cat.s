@@ -3,7 +3,8 @@ global _ft_cat
 extern	_read, _write
 
 section .data
-	buf:	times 1024	db 0
+	fildes:	dq 0
+	buffer:	times 1024	db 0
 
 section .text
 _ft_cat:
@@ -11,18 +12,18 @@ _ft_cat:
 	mov		rbp, rsp
 	push	rdi
 	push	rsi
+	mov		[rel fildes], rdi
 _ft_cat_loop:
-	lea		rsi, [rel buf]
+	lea		rsi, [rel buffer]
 	mov		rdx, 1024
 	call	_read
 	cmp		rax, 1
 	jl		_ft_cat_return	; 0 = eof, -1 = error
 	mov		rdx, rax
-	push	rdi				;save file descriptor for reading
 	mov		rdi, 1
-	lea		rsi, [rel buf]
+	lea		rsi, [rel buffer]
 	call	_write
-	pop		rdi				;restore fd for reading
+	mov		rdi, [rel fildes]
 	cmp		rax, -1			;failed to write?
 	jnz		_ft_cat_loop
 _ft_cat_return:
