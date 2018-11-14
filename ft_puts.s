@@ -20,10 +20,11 @@ _ft_puts:
 	jz		_ft_puts_done	;if yes, return
 _ft_puts_nl:
 	push	rax				;push #1, result of syscall
+	mov		rax, 0x0a0a0a0a
+	push	rax
 	mov		rdx, 1			;one byte only
-	push	0x0a0a0a0a		;push #2, newlines
 	mov		rsi, rsp		;we're gonna print stack =)
-	mov		rdi, 1
+	mov		rdi, 1			;stdout
 	mov		rax, SYS_write
 	syscall
 	pop		rdi				;pop  newlines
