@@ -9,7 +9,7 @@ section .text
 _ft_puts:
 	xor		rax, rax
 	call	_ft_strlen
-	test	al, al
+	test	rax, rax
 	jz		_ft_puts_nl
 	mov		rdx, rax		;param 3, size_t nbyte
 	mov		rsi, rdi		;param 2, const void *buf 

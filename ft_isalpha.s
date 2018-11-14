@@ -6,7 +6,7 @@ section .text
 
 _ft_isalpha:
 	call	_ft_isupper
-	test	al, al
+	test	rax, rax
 	jnz		_ft_isalpha_return
 	call	_ft_islower
 _ft_isalpha_return:
