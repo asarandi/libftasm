@@ -3,7 +3,6 @@ ASM = nasm
 ASM_FLAGS = -g -f macho64
 FILE_NAMES = ft_bzero ft_isalnum ft_isalpha ft_isascii ft_isdigit ft_islower ft_isprint ft_isupper ft_memcpy ft_memset ft_puts ft_strcat ft_strdup ft_strlen ft_tolower ft_toupper
 SRC_DIR = src/
-SRC_FILES = $(addprefix $(SRC_FIR), $(addprefix .s, $(FILE_NAMES)))
 OBJ_DIR = obj/
 OBJ_FILES = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILE_NAMES)))
 
@@ -27,6 +26,6 @@ fclean: clean
 re: fclean all
 
 list:
-	@ls -1 *.s | sed 's/\.s//' | tr '\n' ' '
+	@ls -1 $(SRC_DIR)*.s | sed 's/src\///' | sed 's/\.s//' | tr '\n' ' '
 test:
 	rm -f a.out; gcc -g test1.c -lfts -L.
