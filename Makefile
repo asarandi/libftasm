@@ -1,7 +1,7 @@
 NAME = libfts.a
 ASM = nasm
 ASM_FLAGS = -g -f macho64
-FILE_NAMES = ft_bzero ft_isalnum ft_isalpha ft_isascii ft_isdigit ft_islower ft_isprint ft_isupper ft_memcpy ft_memset ft_puts ft_strcat ft_strdup ft_strlen ft_tolower ft_toupper
+FILE_NAMES = ft_cat ft_bzero ft_isalnum ft_isalpha ft_isascii ft_isdigit ft_islower ft_isprint ft_isupper ft_memcpy ft_memset ft_puts ft_strcat ft_strdup ft_strlen ft_tolower ft_toupper
 SRC_DIR = src/
 OBJ_DIR = obj/
 OBJ_FILES = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILE_NAMES)))
