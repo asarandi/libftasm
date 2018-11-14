@@ -2,11 +2,13 @@ global _ft_puts
 
 extern	_ft_strlen
 
-%include "os_specifics.s"
+SYS_write	equ	0x2000004	;macos64 specific
 
 section .text
 
 _ft_puts:
+	push	rbp
+	mov		rbp, rsp
 	xor		rax, rax
 	call	_ft_strlen
 	test	rax, rax
@@ -33,4 +35,5 @@ _ft_puts_nl:
 	jz		_ft_puts_done
 	add		rax, rdi		;return sum of 2 syscalls
 _ft_puts_done:
+	pop		rbp
 	ret

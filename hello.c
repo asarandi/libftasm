@@ -1,5 +1,17 @@
 #include <unistd.h>
 
+void	*ft_memset(void *s, int c, size_t n)
+{
+	size_t			i;
+	unsigned char	*m;
+
+	m = s;
+	i = 0;
+	while (i < n)
+		m[i++] = c;
+	return (void *)(s);
+}
+
 int	ft_strlen(char *s)
 {
 	int i = 0;
@@ -28,9 +40,11 @@ int	ft_puts(char *s)
 	return (res1 + res2);
 }
 
-int	main()
+int	main(int ac, char **av)
 {
 	char *a = "hello world!";
-	ft_puts(a);
+	if (ac == 2)
+		ft_memset(av[1], 0x45464748, ft_strlen(av[1]));
+	ft_puts(av[1]);
 	return (0);
 }
