@@ -1,24 +1,31 @@
 global _ft_strdup
 
-extern	_ft_strlen, _ft_memcpy, _malloc
+extern	_malloc
 
 section .text
 
 _ft_strdup:
 	push	rbp
 	mov		rbp, rsp
-	push	rdi			;save *str
-	call	_ft_strlen
-	inc		rax			;len + 1
-	mov		rdi, rax	;malloc, 1st parameter
-	push	rdi			;save len + 1
+	push	rdi
+	push	rsi
+	push	rdi			;save *src
+	xor		rax, rax
+	mov		rcx, -1
+	repnz	scasb
+	sub		rax, rcx
+	sub		rax, 1		;len + 1
+	push	rax			;save
+	mov		rdi, rax
 	call	_malloc
-	pop		rdx			;restore len + 1
-	pop		rsi			;restore *str
+	pop		rcx			;restore len + 1
+	pop		rsi			;restore *src
 	test	rax, rax	;did malloc return null?
 	jz		_ft_strdup_return
-	mov		rdi, rax	;fresh mem will be *dst for memcpy
-	call	_ft_memcpy
+	mov		rdi, rax	;new mem will be *dst
+	rep		movsb
 _ft_strdup_return:
+	pop		rsi
+	pop		rdi
 	pop		rbp
 	ret

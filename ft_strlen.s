@@ -3,11 +3,13 @@ global _ft_strlen
 section .text
 
 _ft_strlen:
+	push	rdi
+	push	rcx
 	xor		rax, rax
-_ft_strlen_loop:
-	cmp		byte [rdi + rax], 0
-	jz		_ft_strlen_done
-	inc		rax
-	jmp		_ft_strlen_loop
-_ft_strlen_done:
+	mov		rcx, -1
+	repnz	scasb
+	add		rcx, 2
+	sub		rax, rcx
+	pop		rcx
+	pop		rdi
 	ret

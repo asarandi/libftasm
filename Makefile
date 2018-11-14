@@ -23,4 +23,4 @@ re: fclean all
 list:
 	@ls -1 *.s | sed 's/\.s//' | tr '\n' ' '
 test:
-	rm -f a.out; gcc test1.c -lfts -L.
+	rm -f a.out; gcc -g test1.c -lfts -L.
