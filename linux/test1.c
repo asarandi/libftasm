@@ -46,7 +46,7 @@ ft_puts
 	printf("\n\n");
 
 
-/*
+
 	char	*n1;
 
 	n1 = "123"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
@@ -82,21 +82,20 @@ ft_puts
 	n1 = "4294967296"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
 	n1 = "4294967297"; printf("ft_atoi(\"%s\") = %d,  atoi(\"%s\") = %d \n", n1, ft_atoi(n1), n1, atoi(n1));
 
-*/
 
 	int poots = ft_puts("hello world");
 	printf(" ^^ previous string via ft_puts, returned = %d\n", poots);
 
 	char s4[] = "apple banana orange";
 	ft_puts(s4);
-/*
+
 	ft_puts(ft_memset(s4, 'z', 9));
 	ft_puts(ft_memset(s4, 'a', 5));
 	ft_puts(ft_memset(s4, 'Q', 1));
 	ft_puts(ft_memcpy(s4, "HaHeHoHu", 8));
 	ft_puts(ft_memcpy(s4, s2, ft_strlen(s2)));
 	ft_puts(ft_memcpy(s4, s2, 0));
-*/
+
 
 
 
@@ -104,19 +103,18 @@ ft_puts
 	ft_bzero(s4, ft_strlen(s4)); ft_puts(s4);
 	ft_puts("finito");
 
-//	printf("ft_mytest: %x\n", ft_mytest(0x100001, 0x100002, 0x100003, 0x100004, 0x100005, 0x100006, 0x100007, 0x100008));
+	printf("ft_mytest: %x\n", ft_mytest(0x100001, 0x100002, 0x100003, 0x100004, 0x100005, 0x100006, 0x100007, 0x100008));
 
 
 	ft_puts("");
 //	ft_puts(0);	/* crash */
 	ft_puts("hel\tlo\t\t\twor\tld!!=)");
 
-
-/*
 	char	*buf1;
+
 	buf1 = ft_itoa(0x7fffffff + 2);
 	ft_puts(buf1);
-*/
+
 
 
 	return 0;

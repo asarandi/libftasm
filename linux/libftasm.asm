@@ -152,6 +152,28 @@ ft_mytest:
 
 ;--------------------------------------------------------------
 
+ft_strlen:
+	push	rsi
+	push	rdi
+	push	rcx
+
+	xor	rcx, rcx
+	mov	rsi, rdi
+
+ft_strlen_loop:
+	lodsb
+	cmp	al, 0
+	jz	ft_strlen_done
+	inc	rcx
+	jmp	ft_strlen_loop
+
+ft_strlen_done:
+	mov	rax, rcx
+
+	pop	rcx
+	pop	rdi
+	pop	rsi
+	ret
 
 ;--------------------------------------------------------------
 
