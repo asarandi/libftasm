@@ -1,11 +1,7 @@
 global _ft_puts
-
 extern	_ft_strlen, _write
 
-SYS_write	equ	0x2000004	;macos64 specific
-
 section .text
-
 _ft_puts:
 	push	rbp
 	mov		rbp, rsp
