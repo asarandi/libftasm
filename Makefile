@@ -42,7 +42,24 @@ re: fclean all
 
 list:
 	@ls -1 $(SRC_DIR)*.s | sed 's/.*\///' | sed 's/\.s//' | tr '\n' ' '
-test1:
-	rm -f a.out; gcc -g tests/test1.c -Iinc/ -L. -lfts
-test2:
-	rm -f a.out; gcc -g tests/test2.c -Iinc/ -L. -lfts
+
+test1: $(NAME)
+	rm -rf test1*;
+	gcc -o test1 -g tests/test1.c -Iinc/ -L. -lfts
+test2: $(NAME)
+	rm -rf test2;
+	gcc -o test2 -g tests/test2.c -Iinc/ -L. -lfts
+test3: $(NAME)
+	rm -rf cat_test*;
+	gcc -o cat_test -g tests/cat_test.c -Iinc/ -L. -lfts
+test4: $(NAME)
+	rm -rf atoi_test*;
+	gcc -o atoi_test -g tests/atoi_test.c -Iinc/ -L. -lfts
+
+testrm:
+	rm -rf test1*
+	rm -rf test2*
+	rm -rf cat_test*
+	rm -rf atoi_test*
+
+rmtest: testrm
