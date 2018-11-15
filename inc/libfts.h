@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libfts.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/15 10:29:35 by asarandi          #+#    #+#             */
+/*   Updated: 2018/11/15 10:30:12 by asarandi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFTS_H
 # define LIBFTS_H
 
-#include <unistd.h>
+# include <unistd.h>
 
 /*
 **--[done]---------------------------------------------------------------------
@@ -32,6 +44,6 @@ int		ft_islower(int c);
 int		ft_isspace(int c);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
-int     ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

@@ -34,7 +34,7 @@ $(OBJ_DIR):
 clean:
 	rm -rf $(OBJ_DIR)
 
-fclean: clean
+fclean: clean testrm
 	@rm -rf a.out*
 	rm -f $(NAME)
 
@@ -45,21 +45,45 @@ list:
 
 test1: $(NAME)
 	rm -rf test1*;
-	gcc -o test1 -g tests/test1.c -Iinc/ -L. -lfts
+	gcc -o isX_tests -g tests/isX_tests.c -Iinc/ -L. -lfts
+	@echo ""
+	@echo ""
+	@echo "done, run ./isX_tests   .... no verbose output, maybe look in source file: tests/isX_tests.c"
+
 test2: $(NAME)
-	rm -rf test2;
-	gcc -o test2 -g tests/test2.c -Iinc/ -L. -lfts
+	rm -rf itoa_test*;
+	gcc -o itoa_test -g tests/itoa_test.c -Iinc/ -L. -lfts
+
 test3: $(NAME)
 	rm -rf cat_test*;
 	gcc -o cat_test -g tests/cat_test.c -Iinc/ -L. -lfts
+
 test4: $(NAME)
 	rm -rf atoi_test*;
 	gcc -o atoi_test -g tests/atoi_test.c -Iinc/ -L. -lfts
 
+test5: $(NAME)
+	rm -rf str_test*;
+	gcc -o str_test -g tests/str_test.c -Iinc/ -L. -lfts
+
+fctest: $(NAME)
+	git clone https://github.com/jgigault/42FileChecker 42FC
+	bash 42FC/42FileChecker.sh --project "libftasm" --path `pwd`
+
+testfc: fctest
+
+testall: test1 test2 test3 test4 test5
+
+alltest: testall
+alltests: testall
+
 testrm:
-	rm -rf test1*
-	rm -rf test2*
+	rm -rf 42FC
+	rm -rf isX_tests*
+	rm -rf itoa_test*
 	rm -rf cat_test*
 	rm -rf atoi_test*
+	rm -rf str_test*
 
 rmtest: testrm
+rmtests: testrm
