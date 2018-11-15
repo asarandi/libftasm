@@ -24,19 +24,14 @@ char	*ft_strdup(const char *s1);
 void	ft_cat(int fd);
 
 /*
-**--[extras done]--------------------------------------------------------------
+**--[extras]-------------------------------------------------------------------
 */
+
 int		ft_isupper(int c);
 int		ft_islower(int c);
 int		ft_isspace(int c);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
-
-
-/*
-//--[to be done]---------------------------------------------------------------
-int		ft_atoi(const char *nptr);
 int     ft_strcmp(const char *s1, const char *s2);
-*/
 
 #endif

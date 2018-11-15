@@ -1,6 +1,7 @@
 extern _malloc, _ft_strdup
 global _ft_itoa
 default rel
+bits 64
 
 section .data
 	neg:	db 0
@@ -14,14 +15,11 @@ _ft_itoa:
 	push	rsi
 
 	mov		byte [rel + neg], 0
-	and		rdi, 0xffffffff
-	mov		rax, rdi
-	cmp		rdi, 0x7fffffff
-	jle		ft_itoa_not_negative
+	movsx	rax, edi
+	cmp		rax, 0
+	jge		ft_itoa_not_negative
 	mov		byte [rel + neg], 1
-	mov		rax, 0xffffffff
-	sub		rax, rdi
-	inc		rax
+	neg		rax
 ft_itoa_not_negative:
 	lea		rdi, [rel + buf + 128]
 	mov		byte [rdi], 0
