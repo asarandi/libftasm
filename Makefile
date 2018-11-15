@@ -1,7 +1,7 @@
 NAME = libfts.a
 ASM = nasm
 ASM_FLAGS = -g
-FILE_NAMES = ft_cat ft_bzero ft_isalnum ft_isalpha ft_isascii ft_isdigit ft_islower ft_isprint ft_isupper ft_memcpy ft_memset ft_puts ft_strcat ft_strdup ft_strlen ft_tolower ft_toupper
+FILE_NAMES = ft_atoi ft_bzero ft_cat ft_isalnum ft_isalpha ft_isascii ft_isdigit ft_islower ft_isprint ft_isspace ft_isupper ft_memcpy ft_memset ft_puts ft_strcat ft_strdup ft_strlen ft_tolower ft_toupper
 
 UNAME := $(shell uname -s)
 SRC_DIR := src/$(UNAME)/
@@ -40,6 +40,6 @@ fclean: clean
 re: fclean all
 
 list:
-	@ls -1 $(SRC_DIR)*.s | sed 's/src\///' | sed 's/\.s//' | tr '\n' ' '
+	@ls -1 $(SRC_DIR)*.s | sed 's/.*\///' | sed 's/\.s//' | tr '\n' ' '
 test:
 	rm -f a.out; gcc -g test1.c -lfts -L.

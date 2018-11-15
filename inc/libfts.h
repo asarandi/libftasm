@@ -3,7 +3,9 @@
 
 #include <unistd.h>
 
-//--[done]---------------------------------------------------------------------
+/*
+**--[done]---------------------------------------------------------------------
+*/
 
 void	ft_bzero(void *s, size_t n);
 char	*ft_strcat(char *s1, const char *s2);
@@ -21,17 +23,20 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s1);
 void	ft_cat(int fd);
 
-//--[extras done]--------------------------------------------------------------
-
+/*
+**--[extras done]--------------------------------------------------------------
+*/
 int		ft_isupper(int c);
 int		ft_islower(int c);
+int		ft_isspace(int c);
+int		ft_atoi(const char *str);
+
 
 /*
 //--[to be done]---------------------------------------------------------------
 char	*ft_itoa(int n);
 int		ft_atoi(const char *nptr);
 int     ft_strcmp(const char *s1, const char *s2);
-int		ft_isspace(int c);
 */
 
 #endif
