@@ -9,7 +9,7 @@ SRC_DIR := src/$(UNAME)/
 OBJ_DIR = obj/
 OBJ_DIR_OS = $(OBJ_DIR)$(UNAME)/
 OBJ_FILES = $(addprefix $(OBJ_DIR_OS), $(addsuffix .o, $(FILE_NAMES)))
-
+FC42 := fc42
 
 ifeq ($(UNAME),Linux)
 	ASM_FLAGS += -f elf64
@@ -66,9 +66,11 @@ test5: $(NAME)
 	rm -rf str_test*;
 	gcc -o str_test -g tests/str_test.c -Iinc/ -L. -lfts
 
-fctest: $(NAME)
-	git clone https://github.com/jgigault/42FileChecker 42FC
-	bash 42FC/42FileChecker.sh --project "libftasm" --path `pwd`
+$(FC42):
+	git clone https://github.com/jgigault/42FileChecker $@
+
+fctest: $(NAME) $(FC42)
+	dir=`pwd` && cd $(FC42) && sh 42FileChecker.sh --project "libftasm" --path $$dir && cd ..
 
 testfc: fctest
 
@@ -78,7 +80,6 @@ alltest: testall
 alltests: testall
 
 testrm:
-	rm -rf 42FC
 	rm -rf isX_tests*
 	rm -rf itoa_test*
 	rm -rf cat_test*
